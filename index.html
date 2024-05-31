@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mnvndraah's | Terminal Based Portfolio</title>
+    <title>mnvndraah's Terminal</title>
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
             background-color: #000;
             color: #0F0;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow: hidden; /* Prevent scrolling */
         }
         .container {
             background-color: #000;
@@ -23,12 +24,14 @@
             padding: 20px;
             max-width: 600px;
             width: 90%;
-            text-align: left; /* Left align all content */
+            overflow-y: auto; /* Allow scrolling inside the container */
+            max-height: 80vh; /* Set a max height for the container */
         }
         h1 {
             color: #0F0;
             font-size: 24px;
             margin-bottom: 20px;
+            user-select: none; /* Make unselectable */
         }
         p {
             margin-bottom: 10px;
@@ -36,14 +39,15 @@
         .highlight {
             color: #FF0;
             font-weight: bold;
+            user-select: none; /* Make unselectable */
         }
         .input-line {
             display: flex;
-            align-items: center;
+            align-items: center; /* Align input with prompt */
         }
         .prompt {
             color: #FF0;
-            margin-right: 5px;
+            margin-right: 5px; /* Add margin to separate prompt from input */
         }
         .input-field {
             background-color: transparent;
@@ -51,7 +55,7 @@
             color: #0F0;
             outline: none;
             font-family: 'Courier New', Courier, monospace;
-            width: calc(100% - 150px); /* Adjust input width */
+            flex-grow: 1;
         }
         .button {
             background-color: #00F;
@@ -65,6 +69,60 @@
         .button:hover {
             background-color: #003;
         }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+            user-select: none; /* Make unselectable */
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #111;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            z-index: 1;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease-out, visibility 0.3s ease-out;
+            visibility: hidden;
+        }
+        .dropdown-content.show {
+            display: block;
+            max-height: 200px;
+            visibility: visible;
+        }
+        .dropdown-content a {
+            color: #0F0;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #444;
+        }
+        .arrow {
+            cursor: pointer;
+            font-size: 18px;
+            color: #0F0;
+            margin-left: 5px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+            user-select: none; /* Make unselectable */
+        }
+        .arrow.open {
+            transform: rotate(180deg);
+        }
+        .arrow-wrapper {
+            padding: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        #output {
+            white-space: pre-wrap; /* Preserve white space and line breaks */
+        }
     </style>
 </head>
 <body>
@@ -74,11 +132,40 @@
         <div class="input-line">
             <span class="prompt">mnvndraah@website:~$</span>
             <input type="text" class="input-field" id="userInput" placeholder="Enter a command">
-            <button class="button" onclick="processCommand()">Execute</button>
         </div>
-        <p id="output"></p>
+        <button class="button" onclick="processCommand()">Execute</button>
+        <div class="dropdown">
+            <div class="arrow-wrapper" onclick="toggleDropdown()">
+                <label for="options">Choose an option:</label>
+                <span class="arrow">&#9662;</span>
+            </div>
+            <div class="dropdown-content" id="dropdownContent">
+                <a href="#" onclick="handleOptionClick('hangman')">hangman.exe</a>
+                <a href="#">N/A</a>
+                <a href="#">N/A</a>
+            </div>
+        </div>
+        <pre id="output"></pre>
     </div>
     <script>
+        function toggleDropdown() {
+            var dropdownContent = document.getElementById('dropdownContent');
+            var arrow = document.querySelector('.arrow');
+            if (dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+                arrow.classList.remove('open');
+            } else {
+                dropdownContent.classList.add('show');
+                arrow.classList.add('open');
+            }
+        }
+
+        function handleOptionClick(option) {
+            if (option === 'hangman') {
+                window.location.href = 'https://cdn.discordapp.com/attachments/1187692168207405096/1245978448631959594/hangman.exe?ex=665ab75b&is=665965db&hm=4aa64bbdc13cac2696fbbef0081258a4712ba3117eb8a866646c2fdc361ba9b5&';
+            }
+        }
+
         // Get the input field
         var userInputField = document.getElementById("userInput");
 
@@ -93,9 +180,12 @@
             var userInput = document.getElementById("userInput").value;
             var output = document.getElementById("output");
             var response = executeCommand(userInput);
-            output.innerHTML = response;
+            output.innerHTML += "mnvndraah@website:~$ " + userInput + "\n" + response + "\n";
             // Clear the input field after execution
             document.getElementById("userInput").value = "";
+            // Scroll to the bottom of the container
+            var container = document.querySelector('.container');
+            container.scrollTop = container.scrollHeight;
         }
 
         function executeCommand(command) {
