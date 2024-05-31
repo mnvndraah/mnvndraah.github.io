@@ -99,6 +99,7 @@
         <div class="input-line">
             <span class="prompt">mnvndraah@website:~$</span>
             <input type="text" class="input-field" id="userInput" placeholder="Enter a command">
+            <button class="button" onclick="processCommand()">Execute</button>
         </div>
     </div>
     <script>
@@ -160,7 +161,6 @@
                         "mnvndraah (Manvendra) is a developer with a passion for ethical hacking and creating useful applications.";
                     break;
                 case "exit":
-                    response = "<span class='highlight'>Goodbye!</
                     response = "<span class='highlight'>Goodbye!</span>";
                     setTimeout(function() {
                         window.close();
