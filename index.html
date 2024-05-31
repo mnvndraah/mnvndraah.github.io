@@ -44,6 +44,7 @@
         .input-line {
             display: flex;
             align-items: center; /* Align input with prompt */
+            margin-top: 10px; /* Add margin for new line */
         }
         .prompt {
             color: #FF0;
@@ -71,6 +72,7 @@
         }
         #output {
             white-space: pre-wrap; /* Preserve white space and line breaks */
+            margin-bottom: 10px; /* Add margin for new line */
         }
     </style>
 </head>
@@ -99,7 +101,7 @@
             var userInput = document.getElementById("userInput").value;
             var output = document.getElementById("output");
             var response = executeCommand(userInput);
-            output.innerHTML += "<div>mnvndraah@website:~$ " + userInput + "<br>" + response + "</div>";
+            output.innerHTML += "<div>mnvndraah@website:~$ " + userInput + "<br>" + response + "<br></div>";
             // Clear the input field after execution
             document.getElementById("userInput").value = "";
             // Scroll to the bottom of the container
