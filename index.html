@@ -69,57 +69,6 @@
         .button:hover {
             background-color: #003;
         }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            margin-top: 20px;
-            user-select: none; /* Make unselectable */
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #111;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-            z-index: 1;
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s ease-out, visibility 0.3s ease-out;
-            visibility: hidden;
-        }
-        .dropdown-content.show {
-            display: block;
-            max-height: 200px;
-            visibility: visible;
-        }
-        .dropdown-content a {
-            color: #0F0;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.3s;
-        }
-        .dropdown-content a:hover {
-            background-color: #444;
-        }
-        .arrow {
-            cursor: pointer;
-            font-size: 18px;
-            color: #0F0;
-            margin-left: 5px;
-            display: inline-block;
-            transition: transform 0.3s ease;
-            user-select: none; /* Make unselectable */
-        }
-        .arrow.open {
-            transform: rotate(180deg);
-        }
-        .arrow-wrapper {
-            padding: 10px;
-            display: inline-block;
-            cursor: pointer;
-        }
         #output {
             white-space: pre-wrap; /* Preserve white space and line breaks */
         }
@@ -129,43 +78,15 @@
     <div class="container">
         <h1>Welcome to mnvndraah's Terminal</h1>
         <p>Type <span class="highlight">help</span> to view available commands</p>
-        <div class="input-line">
-            <span class="prompt">mnvndraah@website:~$</span>
-            <input type="text" class="input-field" id="userInput" placeholder="Enter a command">
+        <div id="output">
+            <div class="input-line">
+                <span class="prompt">mnvndraah@website:~$</span>
+                <input type="text" class="input-field" id="userInput" placeholder="Enter a command">
+            </div>
         </div>
         <button class="button" onclick="processCommand()">Execute</button>
-        <div class="dropdown">
-            <div class="arrow-wrapper" onclick="toggleDropdown()">
-                <label for="options">Choose an option:</label>
-                <span class="arrow">&#9662;</span>
-            </div>
-            <div class="dropdown-content" id="dropdownContent">
-                <a href="#" onclick="handleOptionClick('hangman')">hangman.exe</a>
-                <a href="#">N/A</a>
-                <a href="#">N/A</a>
-            </div>
-        </div>
-        <pre id="output"></pre>
     </div>
     <script>
-        function toggleDropdown() {
-            var dropdownContent = document.getElementById('dropdownContent');
-            var arrow = document.querySelector('.arrow');
-            if (dropdownContent.classList.contains('show')) {
-                dropdownContent.classList.remove('show');
-                arrow.classList.remove('open');
-            } else {
-                dropdownContent.classList.add('show');
-                arrow.classList.add('open');
-            }
-        }
-
-        function handleOptionClick(option) {
-            if (option === 'hangman') {
-                window.location.href = 'https://cdn.discordapp.com/attachments/1187692168207405096/1245978448631959594/hangman.exe?ex=665ab75b&is=665965db&hm=4aa64bbdc13cac2696fbbef0081258a4712ba3117eb8a866646c2fdc361ba9b5&';
-            }
-        }
-
         // Get the input field
         var userInputField = document.getElementById("userInput");
 
@@ -180,12 +101,21 @@
             var userInput = document.getElementById("userInput").value;
             var output = document.getElementById("output");
             var response = executeCommand(userInput);
-            output.innerHTML += "mnvndraah@website:~$ " + userInput + "\n" + response + "\n";
+            output.innerHTML += "<div>mnvndraah@website:~$ " + userInput + "<br>" + response + "</div><div class='input-line'><span class='prompt'>mnvndraah@website:~$</span> <input type='text' class='input-field' id='userInput' placeholder='Enter a command'></div>";
             // Clear the input field after execution
             document.getElementById("userInput").value = "";
             // Scroll to the bottom of the container
             var container = document.querySelector('.container');
             container.scrollTop = container.scrollHeight;
+
+            // Focus on the new input field
+            userInputField = document.querySelector('.input-field:last-of-type');
+            userInputField.focus();
+            userInputField.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    processCommand();
+                }
+            });
         }
 
         function executeCommand(command) {
@@ -206,7 +136,7 @@
                         "- exit: Exit the terminal";
                     break;
                 case "clear":
-                    document.getElementById("output").innerHTML = "";
+                    document.getElementById("output").innerHTML = "<div class='input-line'><span class='prompt'>mnvndraah@website:~$</span> <input type='text' class='input-field' id='userInput' placeholder='Enter a command'></div>";
                     response = "";
                     break;
                 case "greet":
