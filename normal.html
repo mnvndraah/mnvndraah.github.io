@@ -7,6 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #121212;
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,41 +17,14 @@
             color: #e0e0e0;
             position: relative;
         }
-
-        /* Background image for desktop */
-        @media only screen and (min-width: 1024px) {
-            body {
-                background-image: url('background-desktop.jpg');
-                background-size: cover;
-            }
-        }
-
-        /* Background image for Android landscape */
-        @media only screen and (max-width: 767px) and (orientation: landscape) {
-            body {
-                background-image: url('background-mobile.jpg');
-                background-size: cover;
-            }
-        }
-
-        /* Background image for Android portrait */
-        @media only screen and (max-width: 767px) and (orientation: portrait) {
-            body {
-                background-image: url('background-mobile.jpg');
-                background-size: cover;
-            }
-        }
-
         .container {
-            background-color: rgba(30, 30, 30, 0.8); /* Semi-transparent background color */
+            background-color: #1e1e1e;
             padding: 20px 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
             position: relative;
         }
-
-        /* Rest of your existing CSS styles */
         .profile-photo {
             width: 100px;
             height: 100px;
@@ -76,7 +50,30 @@
         .dropdown label {
             display: inline-block;
             margin-bottom: 5px;
+            cursor: default; /* Prevent text selection */
+            user-select: none; /* Prevent text selection in Firefox */
+        }
+        .dropdown .arrow {
             cursor: pointer;
+            font-size: 18px;
+            color: #e0e0e0;
+            margin-left: 5px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+            pointer-events: none; /* Disable pointer events */
+        }
+        .dropdown-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .arrow-hitbox {
+            width: 30px; /* Increase hitbox width */
+            height: 30px; /* Increase hitbox height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto; /* Enable pointer events */
         }
         .dropdown-content {
             display: none;
@@ -115,11 +112,6 @@
             background-color: #444;
         }
         .arrow {
-            cursor: pointer;
-            font-size: 18px;
-            color: #e0e0e0;
-            margin-left: 5px;
-            display: inline-block;
             transition: transform 0.3s ease;
         }
         .arrow.open {
@@ -148,8 +140,12 @@
         <h1>Hello, friend.</h1>
         <p><span class="highlight">This page is still in development...</span></p>
         <div class="dropdown">
-            <label for="options">Choose an option:</label>
-            <span class="arrow" onclick="toggleDropdown()">&#9662;</span>
+            <div class="dropdown-container">
+                <label for="options">Choose an option:</label>
+                <div class="arrow-hitbox" onclick="toggleDropdown()">
+                    <span class="arrow">&#9662;</span>
+                </div>
+            </div>
             <div class="dropdown-content" id="dropdownContent">
                 <select id="options" name="options" onchange="handleSelectChange(event)">
                     <option value="">~Links~</option>
