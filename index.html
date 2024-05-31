@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mnvndraah's Terminal</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #0F0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #000;
+            border: 2px solid #0F0;
+            border-radius: 5px;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center; /* Center align all content */
+        }
+        h1 {
+            color: #0F0;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        .highlight {
+            color: #FF0;
+            font-weight: bold;
+        }
+        .input-line {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center input line */
+        }
+        .prompt {
+            color: #FF0;
+            margin-right: 5px;
+        }
+        .input-field {
+            background-color: transparent;
+            border: none;
+            color: #0F0;
+            outline: none;
+            font-family: 'Courier New', Courier, monospace;
+            width: calc(100% - 150px); /* Adjust input width */
+            text-align: left; /* Left align input */
+        }
+        .button {
+            background-color: #00F;
+            color: #FFF;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #003;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to mnvndraah's Terminal</h1>
+        <p>Type <span class="highlight">help</span> to view available commands</p>
+        <div class="input-line">
+            <span class="prompt">mnvndraah@website:~$</span>
+            <input type="text" class="input-field" id="userInput" placeholder="Enter a command">
+            <button class="button" onclick="processCommand()">Execute</button>
+        </div>
+        <p id="output"></p>
+    </div>
+    <script>
+        // Get the input field
+        var userInputField = document.getElementById("userInput");
+
+        // Execute the command when Enter key is pressed
+        userInputField.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                processCommand();
+            }
+        });
+
+        function processCommand() {
+            var userInput = document.getElementById("userInput").value;
+            var output = document.getElementById("output");
+            var response = executeCommand(userInput);
+            output.innerHTML = response;
+            // Clear the input field after execution
+            document.getElementById("userInput").value = "";
+        }
+
+        function executeCommand(command) {
+            var commandParts = command.split(" ");
+            var cmd = commandParts[0].toLowerCase();
+            var args = commandParts.slice(1).join(" ");
+            var response = "";
+
+            switch (cmd) {
+                case "help":
+                    response = "<span class='highlight'>Available Commands:</span><br>" +
+                        "- help: Display this manual<br>" +
+                        "- clear: Clear the terminal screen<br>" +
+                        "- greet: Display a welcome message<br>" +
+                        "- date: Show the current date and time<br>" +
+                        "- echo [message]: Echo back the provided message<br>" +
+                        "- about: Display information about mnvndraah<br>" +
+                        "- exit: Exit the terminal";
+                    break;
+                case "clear":
+                    document.getElementById("output").innerHTML = "";
+                    response = "";
+                    break;
+                case "greet":
+                    response = "<span class='highlight'>Hello, friend!</span>";
+                    break;
+                case "date":
+                    var currentDate = new Date().toLocaleString();
+                    response = "<span class='highlight'>Current Date and Time:</span> " + currentDate;
+                    break;
+                case "echo":
+                    response = "<span class='highlight'>Echo:</span> " + args;
+                    break;
+                case "about":
+                    response = "<span class='highlight'>About mnvndraah:</span><br>" +
+                        "mnvndraah (Manvendra) is a developer with a passion for ethical hacking and creating useful applications.";
+                    break;
+                case "exit":
+                    response = "<span class='highlight'>Goodbye!</span>";
+                    setTimeout(function() {
+                        window.close();
+                    }, 1000); // Close the window after 1 second
+                    break;
+                default:
+                    response = "<span class='highlight'>Error:</span> Command not recognized. Type 'help' for available commands.";
+            }
+
+            return response;
+        }
+    </script>
+</body>
+</html>
