@@ -78,13 +78,11 @@
     <div class="container">
         <h1>Welcome to mnvndraah's Terminal</h1>
         <p>Type <span class="highlight">help</span> to view available commands</p>
-        <div id="output">
-            <div class="input-line">
-                <span class="prompt">mnvndraah@website:~$</span>
-                <input type="text" class="input-field" id="userInput" placeholder="Enter a command">
-            </div>
+        <div id="output"></div>
+        <div class="input-line">
+            <span class="prompt">mnvndraah@website:~$</span>
+            <input type="text" class="input-field" id="userInput" placeholder="Enter a command">
         </div>
-        <button class="button" onclick="processCommand()">Execute</button>
     </div>
     <script>
         // Get the input field
@@ -101,21 +99,12 @@
             var userInput = document.getElementById("userInput").value;
             var output = document.getElementById("output");
             var response = executeCommand(userInput);
-            output.innerHTML += "<div>mnvndraah@website:~$ " + userInput + "<br>" + response + "</div><div class='input-line'><span class='prompt'>mnvndraah@website:~$</span> <input type='text' class='input-field' id='userInput' placeholder='Enter a command'></div>";
+            output.innerHTML += "<div>mnvndraah@website:~$ " + userInput + "<br>" + response + "</div>";
             // Clear the input field after execution
             document.getElementById("userInput").value = "";
             // Scroll to the bottom of the container
             var container = document.querySelector('.container');
             container.scrollTop = container.scrollHeight;
-
-            // Focus on the new input field
-            userInputField = document.querySelector('.input-field:last-of-type');
-            userInputField.focus();
-            userInputField.addEventListener("keydown", function(event) {
-                if (event.key === "Enter") {
-                    processCommand();
-                }
-            });
         }
 
         function executeCommand(command) {
@@ -136,7 +125,7 @@
                         "- exit: Exit the terminal";
                     break;
                 case "clear":
-                    document.getElementById("output").innerHTML = "<div class='input-line'><span class='prompt'>mnvndraah@website:~$</span> <input type='text' class='input-field' id='userInput' placeholder='Enter a command'></div>";
+                    document.getElementById("output").innerHTML = "";
                     response = "";
                     break;
                 case "greet":
