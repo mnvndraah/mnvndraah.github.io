@@ -7,7 +7,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,14 +16,41 @@
             color: #e0e0e0;
             position: relative;
         }
+
+        /* Background image for desktop */
+        @media only screen and (min-width: 1024px) {
+            body {
+                background-image: url('background-desktop.jpg');
+                background-size: cover;
+            }
+        }
+
+        /* Background image for Android landscape */
+        @media only screen and (max-width: 767px) and (orientation: landscape) {
+            body {
+                background-image: url('background-mobile.jpg');
+                background-size: cover;
+            }
+        }
+
+        /* Background image for Android portrait */
+        @media only screen and (max-width: 767px) and (orientation: portrait) {
+            body {
+                background-image: url('background-mobile.jpg');
+                background-size: cover;
+            }
+        }
+
         .container {
-            background-color: #1e1e1e;
+            background-color: rgba(30, 30, 30, 0.8); /* Semi-transparent background color */
             padding: 20px 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
             position: relative;
         }
+
+        /* Rest of your existing CSS styles */
         .profile-photo {
             width: 100px;
             height: 100px;
