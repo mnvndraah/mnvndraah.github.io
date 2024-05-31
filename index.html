@@ -73,6 +73,19 @@
         #output {
             white-space: pre-wrap; /* Preserve white space and line breaks */
             margin-bottom: 10px; /* Add margin for new line */
+            overflow-y: auto; /* Enable scrollbar */
+            max-height: 50vh; /* Limit output height */
+            scrollbar-width: thin; /* For Firefox */
+        }
+        #output::-webkit-scrollbar {
+            width: 8px; /* Set scrollbar width */
+        }
+        #output::-webkit-scrollbar-track {
+            background: #000; /* Set track color */
+        }
+        #output::-webkit-scrollbar-thumb {
+            background: #0F0; /* Set thumb color */
+            border-radius: 4px; /* Round thumb corners */
         }
     </style>
 </head>
@@ -131,6 +144,8 @@
                     response = "";
                     break;
                 case "greet":
+                    response = "<span class='highlight'>Hello, friend!</span>";
+                   
                     response = "<span class='highlight'>Hello, friend!</span>";
                     break;
                 case "date":
