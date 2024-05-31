@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Beautiful Blog</title>
+    <title>Sign Up - Beautiful Blog</title>
     <style>
         /* Reset CSS */
         * {
@@ -81,8 +81,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>Login to Beautiful Blog</h2>
-        <form id="loginForm">
+        <h2>Sign Up for Beautiful Blog</h2>
+        <form id="signupForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -91,27 +91,36 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Login</button>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <button type="submit">Sign Up</button>
             <div class="error-message" id="errorMessage"></div>
         </form>
     </div>
 
     <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent form submission
 
-            // Get username and password
+            // Get form inputs
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
 
-            // Simulate login (replace with actual authentication logic)
-            if (username === "admin" && password === "password") {
-                // Redirect to homepage after successful login
-                window.location.href = "/";
-            } else {
-                // Display error message for invalid credentials
-                document.getElementById("errorMessage").innerText = "Invalid username or password.";
+            // Validate password match
+            if (password !== confirmPassword) {
+                document.getElementById("errorMessage").innerText = "Passwords do not match.";
+                return;
             }
+
+            // Simulate sign up (replace with actual sign-up logic)
+            // Here, we'll simply alert the user with the entered username
+            alert("Sign up successful for username: " + username);
+
+            // Redirect to login page after successful sign-up (replace with actual redirection)
+            window.location.href = "/login";
         });
     </script>
 </body>
