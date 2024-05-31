@@ -89,11 +89,19 @@
             background: #0F0; /* Set thumb color */
             border-radius: 3px; /* Round thumb edges */
         }
+        .normal-website {
+            color: #0F0;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .normal-website:hover {
+            color: #FF0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to mnvndraah's Terminal</h1>
+        <h1>Welcome to mnvndraah's Terminal <span class="normal-website" onclick="window.location.href='https://mnvndraah.github.io/normal'">normal website</span></h1>
         <p>Type <span class="highlight">help</span> to view available commands</p>
         <div id="output"></div>
         <div class="input-line">
