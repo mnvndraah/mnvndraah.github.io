@@ -3,16 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Website</title>
+    <title>Beautiful Blog</title>
     <style>
-        /* CSS styles for layout, design, and responsiveness */
-        /* ... */
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 0.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 1rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .blog-post {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 1rem;
+            width: 30%;
+            min-width: 300px;
+        }
+
+        .blog-post h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .comments {
+            margin-top: 2rem;
+        }
+
+        .comment {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment p {
+            color: #777;
+            margin-bottom: 0.5rem;
+        }
+
+        .add-comment-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        .add-comment-form button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-comment-form button:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
     <header>
-        <!-- Header content including navigation bar, logo, etc. -->
-        <!-- Example: -->
+        <h1>Beautiful Blog</h1>
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
@@ -22,42 +137,27 @@
         </nav>
     </header>
     <main>
-        <!-- Main content area including blog posts, comments, etc. -->
-        <!-- Example: -->
-        <section class="blog-posts">
-            <!-- Individual blog post -->
-            <article class="blog-post">
-                <h2>Blog Post Title</h2>
-                <p>Author: John Doe</p>
-                <p>Date: January 1, 2024</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget libero aliquet, fermentum enim vitae, blandit neque. Sed nec eros at lectus tristique faucibus. Phasellus bibendum purus at elit blandit tristique. Nullam at arcu aliquet, posuere felis sed, tristique purus.</p>
-                <!-- Comments section -->
-                <section class="comments">
-                    <h3>Comments</h3>
-                    <!-- Individual comment -->
-                    <div class="comment">
-                        <p>Commenter: Jane Doe</p>
-                        <p>Date: January 2, 2024</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                    <!-- Add comment form -->
-                    <form class="add-comment-form">
-                        <textarea name="comment" placeholder="Add your comment"></textarea>
-                        <button type="submit">Post Comment</button>
-                    </form>
-                </section>
-            </article>
-        </section>
+        <article class="blog-post">
+            <h2>Blog Post Title</h2>
+            <p>Author: John Doe</p>
+            <p>Date: January 1, 2024</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget libero aliquet, fermentum enim vitae, blandit neque. Sed nec eros at lectus tristique faucibus. Phasellus bibendum purus at elit blandit tristique. Nullam at arcu aliquet, posuere felis sed, tristique purus.</p>
+            <section class="comments">
+                <h3>Comments</h3>
+                <div class="comment">
+                    <p>Commenter: Jane Doe</p>
+                    <p>Date: January 2, 2024</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <form class="add-comment-form">
+                    <textarea name="comment" placeholder="Add your comment"></textarea>
+                    <button type="submit">Post Comment</button>
+                </form>
+            </section>
+        </article>
     </main>
     <footer>
-        <!-- Footer content including copyright information, contact details, etc. -->
-        <!-- Example: -->
-        <p>&copy; 2024 Blog Website. All rights reserved.</p>
+        <p>&copy; 2024 Beautiful Blog. All rights reserved.</p>
     </footer>
-    <script>
-        // JavaScript code for handling user interactions and functionality
-        // Example: Handling form submissions, AJAX requests, etc.
-        // ...
-    </script>
 </body>
 </html>
