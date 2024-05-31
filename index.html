@@ -76,16 +76,18 @@
             overflow-y: auto; /* Enable scrollbar */
             max-height: 50vh; /* Limit output height */
             scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: #0F0 #000; /* Set thumb and track colors */
         }
         #output::-webkit-scrollbar {
-            width: 8px; /* Set scrollbar width */
+            width: 6px; /* Set scrollbar width */
         }
         #output::-webkit-scrollbar-track {
             background: #000; /* Set track color */
+            border-radius: 5px; /* Round track edges */
         }
         #output::-webkit-scrollbar-thumb {
             background: #0F0; /* Set thumb color */
-            border-radius: 4px; /* Round thumb corners */
+            border-radius: 3px; /* Round thumb edges */
         }
     </style>
 </head>
@@ -145,8 +147,6 @@
                     break;
                 case "greet":
                     response = "<span class='highlight'>Hello, friend!</span>";
-                   
-                    response = "<span class='highlight'>Hello, friend!</span>";
                     break;
                 case "date":
                     var currentDate = new Date().toLocaleString();
@@ -160,6 +160,7 @@
                         "mnvndraah (Manvendra) is a developer with a passion for ethical hacking and creating useful applications.";
                     break;
                 case "exit":
+                    response = "<span class='highlight'>Goodbye!</
                     response = "<span class='highlight'>Goodbye!</span>";
                     setTimeout(function() {
                         window.close();
